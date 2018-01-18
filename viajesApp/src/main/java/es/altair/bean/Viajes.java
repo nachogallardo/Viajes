@@ -22,7 +22,7 @@ public class Viajes implements Serializable{
 	private String nombre;
 	private String descripcion;
 	private int precio;
-	
+	private byte[] portada;
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 		name="billetes", 
@@ -35,16 +35,23 @@ public class Viajes implements Serializable{
 		super();
 	}
 	
-	public Viajes(int idViaje, String nombre, String descripcion, int precio) {
-		super();
-		this.idViaje = idViaje;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
-	}
+	
 
 	
 	
+	public Viajes(String nombre, String descripcion, int precio, byte[] portada, Set<Usuarios> usuarios) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.portada = portada;
+		this.usuarios = usuarios;
+	}
+
+
+
+
+
 	public int getIdViaje() {
 		return idViaje;
 	}
@@ -78,6 +85,24 @@ public class Viajes implements Serializable{
 	public void setUsuarios(Set<Usuarios> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	
+
+	public byte[] getPortada() {
+		return portada;
+	}
+
+
+
+
+
+	public void setPortada(byte[] portada) {
+		this.portada = portada;
+	}
+
+
+
+
 
 	@Override
 	public String toString() {

@@ -6,4 +6,5 @@ import es.altair.bean.Viajes;
 
 public interface ViajesDao {
 	public List<Viajes> listarTodosViajes();
+	byte[] obtenerPortadaPorId(int idViaje);
 }
