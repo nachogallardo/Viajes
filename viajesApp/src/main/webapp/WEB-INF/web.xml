@@ -4,4 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>RegistrarUsuario</servlet-name>
+  	<display-name>RegistrarUsuario</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.RegistrarUsuario</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ValidarUsuario</servlet-name>
+  	<display-name>ValidarUsuario</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.ValidarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RegistrarUsuario</servlet-name>
+  	<url-pattern>/RegistrarUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ValidarUsuario</servlet-name>
+  	<url-pattern>/ValidarUsuario</url-pattern>
+  </servlet-mapping>
 </web-app>

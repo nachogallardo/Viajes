@@ -5,21 +5,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 import es.altair.bean.Usuarios;
 import es.altair.dao.UsuariosDao;
 import es.altair.dao.UsuariosDaoImp;
 
 /**
- * Servlet implementation class RegistrarUsuario
+ * Servlet implementation class ValidarUsuario
  */
-public class RegistrarUsuario extends HttpServlet {
+public class ValidarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrarUsuario() {
+    public ValidarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,35 +38,35 @@ public class RegistrarUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("nombre");
-		String contrasenia = request.getParameter("contrasenia");
-		String email = request.getParameter("email");
-		int telefono = Integer.parseInt(request.getParameter("telefono"));
-		String direccion = request.getParameter("direccion");
-		
-		Usuarios usu = new Usuarios(nombre, contrasenia, email, telefono, direccion,2);
+		String usuario = request.getParameter("usuario");
+		String password = request.getParameter("password");
 		
 		UsuariosDao uDAO = new UsuariosDaoImp();
 		
-		int filas = 0;
-		String msg = "";		
-		
-		if (uDAO.validarUsuario(usu)) {
-			filas = uDAO.insertar(usu);
-			if (filas == 1) {
-				msg = "Usuario Registrado";
-				
-				response.sendRedirect("index.jsp?mensaje="+msg);
-			}
-			else {
-				msg = "Error al Registrar al Usuario";
-				
-				response.sendRedirect("index.jsp?mensaje="+msg);
-			}
-		} else {
-			msg = "Nombre de usuario ya registrado. Inténtelo con otro";
+		Usuarios usu = uDAO.comprobarUsuario(usuario, password);
+		if (usu!=null) {
+			// Usuario correcto
+			// Poner al usuario en sesión
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("usuLogeado", usu);
 			
-			response.sendRedirect("index.jsp?mensaje="+msg);
+			switch (usu.getTipoUsuario()) {
+			case 2:
+				// Usuario Normal
+				response.sendRedirect("jsp/usuario.jsp");
+				break;
+			case 1:
+				// Administrador
+				response.sendRedirect("jsp/administrador.jsp");
+				break;
+
+			default:
+				break;
+			}
+			System.out.println(usu);
+		} else {
+			// Error Usuario
+			response.sendRedirect("index.jsp?fallo=Usuario y/o Password Incorrecto");
 		}
 	}
 
