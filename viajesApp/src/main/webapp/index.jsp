@@ -19,7 +19,6 @@
 			claves.innerHTML = "Las contraseñas tienen que ser iguales";
 			boton.disabled = true;
 		}
-
 	}
 </script>
 <meta charset="utf-8">
@@ -33,7 +32,7 @@
 
 <link rel="icon" href="images/favicon.ico">
 
-<title>Medialoot Bootstrap 4 Dashboard Template</title>
+<title>Viajes</title>
 
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,51 +58,51 @@
 		<div class="row">
 			<nav
 				class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded sidebar-style-1">
+				
+				
+				<div style="height: 5%;" class="row"></div>
 				<h1 class="site-title">
-					<a href="index.html"><em class="fa fa-rocket"></em> Viajes</a>
+					 <em class="fa fa-rocket"></em>Inicie Sesion
 				</h1>
+				<form role="form" method="POST" action="ValidarUsuario"
+					class="form-check">
+					<div class="row">
+						<div class="input-group col-md-12">
 
-				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em
-					class="fa fa-bars"></em></a>
-
-				
-					<form role="form" method="POST" action="ValidarUsuario"
-						class="form-check">
-						<div class="row">
-							<div class="input-group col-md-12">
-
-								<input type="text" class="form-control" id="usuario"
-									name="usuario" placeholder="Usuario" autofocus
-									required="required">
-							</div>
-							
-							<div class="col-12"></div>
-							<div class="input-group col-md-12">
-
-								<input class="form-control" type="password" id="password"
-									name="password" placeholder="Contraseña" required="required">
-							</div>
-							<div class="col-12"></div>
-							<button type="submit" class="btn btn-md btn-info col-12">
-								<i class="fa fa-sign-in"></i> Iniciar Sesion
-							</button>
-							<%
-								String fallo = request.getParameter("fallo");
-								if (fallo != null) {
-							%>
-							<div style="color:black;" class="alert alert-warning alert-dismissable form-control">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-hidden="true">x</button>
-								<strong>Info!</strong>
-								<%=fallo%>
-							</div>
-							<%
-								}
-							%>
+							<input type="text" class="form-control" id="usuario"
+								name="usuario" placeholder="Usuario" autofocus
+								required="required">
 						</div>
-					</form>
 
-				
+						<div class="col-12"></div>
+						<div class="input-group col-md-12">
+
+							<input class="form-control" type="password" id="password"
+								name="password" placeholder="Contraseña" required="required">
+						</div>
+						
+						<div class="col-12"></div>
+						<button type="submit" class="btn btn-md btn-info col-12">
+							<i class="fa fa-sign-in"></i> Iniciar Sesion
+						</button>
+						<%
+							String fallo = request.getParameter("fallo");
+							if (fallo != null) {
+						%>
+						<div style="color: black;"
+							class="alert alert-warning alert-dismissable form-control">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">x</button>
+							<strong>Info!</strong>
+							<%=fallo%>
+						</div>
+						<%
+							}
+						%>
+					</div>
+				</form>
+
+
 
 
 			</nav>
@@ -124,30 +123,26 @@
 
 				<div class="row">
 					<div class="col-md-8">
+						<div class="row">
 						<%
 							for (Viajes v : viajes) {
 						%>
-						<div class="col-sm-2">
+						<div class="col-md-6">
+						<div class="card" style="width: 18rem;height: 30rem;">
 							<img alt="Portada" src="jsp/image.jsp?imag=<%=v.getIdViaje()%>"
-								class="img-thumbnail" width="200" height="200">
-						</div>
-						<div class="col-sm-10">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title"><%=v.getNombre()%></h5>
-
-									<p class="card-text"><%=v.getDescripcion()%></p>
-								</div>
+								class="img-thumbnail" width="286" height="186">
+								<br>
+							<div class="card-body">
+								<h5 class="card-title"><%=v.getNombre()%></h5>
+								<p class="card-text"><%=v.getDescripcion()%></p>
 							</div>
-							<br> <br>
+							</div>
 						</div>
-
-
 
 						<%
 							}
 						%>
-
+					</div>
 					</div>
 					<div class="col-md-4">
 
@@ -157,23 +152,24 @@
 									<h3>
 										<i class="fa fa-address-card"></i> Registrar
 									</h3>
-								
+
 								</div>
 							</div>
 							<div class="card-body p-3">
-									<%
-										String error = request.getParameter("mensaje");
-										if (error != null) {
-									%>
-									<div style="color:black;" class="alert alert-warning alert-dismissable">
-										<button type="button" class="close" data-dismiss="alert"
-											aria-hidden="true">x</button>
-										<strong>Info!</strong>
-										<%=error%>
-									</div>
-									<%
-										}
-									%>
+								<%
+									String error = request.getParameter("mensaje");
+									if (error != null) {
+								%>
+								<div style="color: black;"
+									class="alert alert-warning alert-dismissable">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">x</button>
+									<strong>Info!</strong>
+									<%=error%>
+								</div>
+								<%
+									}
+								%>
 								<!--Body-->
 								<form role="form" method="POST" action="RegistrarUsuario"
 									class="form-check">

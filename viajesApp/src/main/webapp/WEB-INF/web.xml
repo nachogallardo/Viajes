@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>es.altair.controller.CerrarSesion</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ComprarViaje</servlet-name>
+  	<display-name>ComprarViaje</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.ComprarViaje</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>RegistrarUsuario</servlet-name>
   	<url-pattern>/RegistrarUsuario</url-pattern>
@@ -33,5 +39,9 @@
   <servlet-mapping>
   	<servlet-name>CerrarSesion</servlet-name>
   	<url-pattern>/CerrarSesion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ComprarViaje</servlet-name>
+  	<url-pattern>/ComprarViaje</url-pattern>
   </servlet-mapping>
 </web-app>

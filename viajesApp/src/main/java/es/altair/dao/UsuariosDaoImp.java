@@ -16,7 +16,7 @@ public class UsuariosDaoImp implements UsuariosDao {
 		try {
 			sesion.beginTransaction();
 
-			if ((Usuarios) sesion.createQuery("From Usuario Where nombre=:u")
+			if ((Usuarios) sesion.createSQLQuery("From usuarios Where nombre=:u")
 					.setParameter("u", usu.getNombre())
 					.uniqueResult() != null)
 				correcto = false;
