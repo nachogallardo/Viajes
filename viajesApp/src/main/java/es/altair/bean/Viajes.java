@@ -52,6 +52,18 @@ public class Viajes implements Serializable{
 
 
 
+	public Viajes(String nombre, String descripcion, int precio, byte[] bs) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.portada = bs;
+	}
+
+
+
+
+
 	public int getIdViaje() {
 		return idViaje;
 	}

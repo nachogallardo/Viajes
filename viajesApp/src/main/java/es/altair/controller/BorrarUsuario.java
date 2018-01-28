@@ -5,19 +5,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import es.altair.dao.UsuariosDao;
+import es.altair.dao.UsuariosDaoImp;
 
 /**
- * Servlet implementation class CerrarSesion
+ * Servlet implementation class BorrarUsuario
  */
-
-public class CerrarSesion extends HttpServlet {
+public class BorrarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CerrarSesion() {
+    public BorrarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,19 +27,19 @@ public class CerrarSesion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sesion = request.getSession();		
-		sesion.removeAttribute("usuLogeado");
-		sesion.invalidate();
-		
-		response.sendRedirect("index.jsp?fallo=Sesion cerrada");
+		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int idUsuario=Integer.parseInt(request.getParameter("id"));
+		UsuariosDao uDao= new UsuariosDaoImp();
+		uDao.borrarUsuario(idUsuario);
+		response.sendRedirect("jsp/administrador.jsp");
+		
 	}
 
 }

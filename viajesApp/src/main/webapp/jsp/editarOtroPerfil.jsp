@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="es.altair.dao.UsuariosDaoImp"%>
+<%@page import="es.altair.dao.UsuariosDao"%>
 <%@page import="org.hibernate.boot.model.source.internal.hbm.AbstractEntitySourceImpl"%>
 <%@page import="es.altair.bean.Usuarios"%>
 <html lang="en">
@@ -35,6 +37,9 @@
 		if (session.getAttribute("usuLogeado") == null || session.isNew()) {
 			response.sendRedirect("../index.jsp?mensaje=Inicie sesión");
 		} else {
+			UsuariosDao uDao= new UsuariosDaoImp();
+			int id = Integer.parseInt(request.getParameter("id"));
+			Usuarios usu=uDao.usuarioPorId(id);
 			
 	%>
 
@@ -50,14 +55,19 @@
 					class="fa fa-bars"></em></a>
 
 				<ul class="nav nav-pills flex-column sidebar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						href="administrador.jsp"><em class="fa fa-user-circle mr-1"></em>
+							Editar Usuarios <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="usuario.jsp"><em class="fa fa-user-circle mr-1"></em> Principal
-							<span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="editarPerfil.jsp"><em
-							class="fa fa-cog mr-1"></em> Editar Perfil</a></li>
-							<li class="nav-item"><a class="nav-link" href="gestionarViajes.jsp"><em
-							class="fa fa-plane mr-1"></em> Gestionar Viajes</a></li>
-					
+						href="editarPerfilAdmin.jsp"><em class="fa fa-cog mr-1"></em>
+							Editar Perfil</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="agregarViajes.jsp"><em class="fa fa-plane mr-1"></em>
+							Agregar Viajes</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="borrarViajes.jsp"><em class="fa fa-plane mr-1"></em>
+							Borrar Viajes</a></li>
+
 				</ul>
 
 				<a href="../CerrarSesion" class="logout-button"><em class="fa fa-power-off"></em>
@@ -124,9 +134,9 @@
 								<%
 									}
 								%>
-			<form role="form" method="POST" action="../EditarUsuario"
+			<form role="form" method="POST" action="../EditarOtroUsu"
 									class="form-check">
-									<input style="display: none;" type="number" name="idUsuario" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getIdUsuario()%>" required="required"
+									<input style="display: none;" type="number" name="idUsuario" value="<%=usu.getIdUsuario()%>" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="Nombre">
 									<div class="form-group">
@@ -134,7 +144,7 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-user text-primary"></i>
 											</div>
-											<input type="text" name="nombre" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getNombre()%>" required="required"
+											<input type="text" name="nombre" value="<%=usu.getNombre()%>" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="Nombre">
 										</div>
@@ -144,7 +154,7 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-envelope text-primary"></i>
 											</div>
-											<input type="text" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getEmail()%>" name="email" required="required"
+											<input type="text" value="<%=usu.getEmail()%>" name="email" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="Email">
 										</div>
@@ -162,9 +172,19 @@
 									<div class="form-group">
 										<div class="input-group mb-2 mb-sm-0">
 											<div class="input-group-addon bg-light">
+												<i class="fa fa-user-o prefix text-primary" aria-hidden="true"></i>
+											</div>
+											<input type="number" value="<%=usu.getTipoUsuario()%>" name="tipoUsuario" required="required"
+												class="form-control" id="inlineFormInputGroupUsername"
+												placeholder="Tipo Usuario(1||2)">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group mb-2 mb-sm-0">
+											<div class="input-group-addon bg-light">
 												<i class="fa fa-phone text-primary"></i>
 											</div>
-											<input type="number" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getTelefono()%>" name="telefono" required="required"
+											<input type="number" value="<%=usu.getTelefono()%>" name="telefono" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="telefono">
 										</div>
@@ -174,7 +194,7 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-home text-primary"></i>
 											</div>
-											<input type="text" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getDireccion()%>" name="direccion" class="form-control"
+											<input type="text" value="<%=usu.getDireccion()%>" name="direccion" class="form-control"
 												id="inlineFormInputGroupUsername" required="required"
 												placeholder="direccion">
 										</div>

@@ -1,12 +1,75 @@
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="es.altair.bean.Viajes"%>
+<%@page import="java.util.List"%>
 <%@page import="es.altair.dao.ViajesDaoImp"%>
 <%@page import="es.altair.dao.ViajesDao"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="es.altair.bean.Viajes"%>
+<%@page import="org.hibernate.boot.model.source.internal.hbm.AbstractEntitySourceImpl"%>
 <%@page import="es.altair.bean.Usuarios"%>
 <html lang="en">
 <head>
+<style>
+.title-header {
+	padding: .75rem 1.25rem;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid transparent;
+}
+
+.title-header h3 {
+	font-size: 0.80rem;
+	margin: 0;
+}
+
+.movies {
+	margin-top: 2rem;
+}
+
+.img-card {
+	width: 100%;
+	margin-bottom: .40rem;
+}
+
+.movies {
+	margin-bottom: .60rem;
+}
+
+.series {
+	margin-bottom: .60rem;
+}
+
+.footer {
+	padding: 1rem 0;
+	margin-top: 2rem;
+	font-size: 80%;
+	text-align: left;
+}
+
+.footer p {
+	margin: 0;
+}
+
+.footer-links {
+	padding-left: 0;
+	margin-bottom: 1rem;
+}
+
+.footer-links li {
+	display: inline-block;
+}
+
+.footer a {
+	font-weight: 500;
+	color: inherit;
+}
+
+.footer-links li+li {
+	margin-left: 1rem;
+}
+/* Bug Bootstrap V4.0.6 - Mobile - SCSS _navbar*/
+.navbar {
+	display: block;
+}
+</style>
 <meta charset="utf-8">
 
 <meta name="viewport"
@@ -39,8 +102,8 @@
 		if (session.getAttribute("usuLogeado") == null || session.isNew()) {
 			response.sendRedirect("../index.jsp?mensaje=Inicie sesión");
 		} else {
-			List<Viajes> viajes = new ArrayList<Viajes>();
 			ViajesDao vDao = new ViajesDaoImp();
+			List<Viajes> viajes = new ArrayList<Viajes>();
 			viajes = vDao.listarTodosViajes();
 	%>
 
@@ -57,35 +120,30 @@
 
 				<ul class="nav nav-pills flex-column sidebar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						href="usuario.jsp"><em class="fa fa-user-circle mr-1"></em>
-							Principal <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="editarPerfil.jsp"><em class="fa fa-cog mr-1"></em>
-							Editar Perfil</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="gestionarViajes.jsp"><em class="fa fa-plane mr-1"></em>
-							Gestionar Viajes</a></li>
-
+						href="usuario.jsp"><em class="fa fa-user-circle mr-1"></em> Principal
+							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="editarPerfil.jsp"><em
+							class="fa fa-cog mr-1"></em> Editar Perfil</a></li>
+							<li class="nav-item"><a class="nav-link" href="gestionarViajes.jsp"><em
+							class="fa fa-plane mr-1"></em> Gestionar Viajes</a></li>
+					
 				</ul>
 
-				<a href="../CerrarSesion" class="logout-button"><em
-					class="fa fa-power-off"></em> Cerrar Sesion</a>
+				<a href="../CerrarSesion" class="logout-button"><em class="fa fa-power-off"></em>
+					Cerrar Sesion</a>
 			</nav>
 
 			<main
 				class="col-xs-12 col-sm-8 offset-sm-4 col-lg-9 offset-lg-3 col-xl-10 offset-xl-2 pt-3 pl-4">
 			<header class="page-header row justify-center">
 				<div class="col-md-6 col-lg-8">
-					<h1 class="float-left text-center text-md-left">
-						Bienvenido
-						<%=((Usuarios) session.getAttribute("usuLogeado")).getNombre()%></h1>
-						
+					<h1 class="float-left text-center text-md-left">Bienvenido <%=((Usuarios) session.getAttribute("usuLogeado")).getNombre()%></h1>
 				</div>
 
 				<div
 					class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
 					<a class="btn btn-stripped dropdown-toggle"
-						href="https://example.com" id="dropdownMenuLink"
+						href="#" id="dropdownMenuLink"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 
@@ -99,57 +157,46 @@
 					<div class="dropdown-menu dropdown-menu-right"
 						style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="editarPerfil.jsp"><em
-							class="fa fa-cog mr-1"></em> Editar Perfil</a> <a
-							class="dropdown-item" href="../CerrarSesion"><em
-							class="fa fa-power-off mr-1"></em> Cerrar Sesion</a> <a
-							class="dropdown-item" href="gestionarViajes.jsp"><em
+							class="fa fa-cog mr-1"></em> Editar Perfil</a> <a class="dropdown-item" href="../CerrarSesion"><em
+							class="fa fa-power-off mr-1"></em> Cerrar Sesion</a>
+							<a class="dropdown-item" href="gestionarViajes.jsp"><em
 							class="fa fa-plane mr-1"></em> Gestionar Viajes</a>
 					</div>
+					
+					
+					
+					
+					
 				</div>
+
+				<div class="clear"></div>
 			</header>
 			<div class="row">
-			
-				<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-					<div class="row">
-						<%
-							for (Viajes v : viajes) {
-						%>
-						<div class="col-md-6">
-							<div class="card" style="width: 16rem; height: 15;">
-								<img alt="Portada" src="image.jsp?imag=<%=v.getIdViaje()%>"
-									class="img-thumbnail" width="280" height="180"> <br>
-								<div class="card-body">
-									<h5 class="card-title"><%=v.getNombre()%>
+			<%for(Viajes v:viajes){ %>
 
-									</h5>
-								</div>
-								<a href="../ComprarViaje?idViaje=<%=v.getIdViaje()%>&idUsuario=<%=((Usuarios) session.getAttribute("usuLogeado")).getIdUsuario()%>">
-								<button style="width: 16rem;" class="btn-success">
-									<%=v.getPrecio()%><i class="fa fa-eur" aria-hidden="true"></i>
-									Comprar <i class="fa fa-cart-plus" aria-hidden="true"></i>									
-								</button>
-								</a>
-
-
+			<div class="col-lg-3 col-md-3 col-sm-3">
+				<article class="card">
+					<header class="title-header">
+						<h3><%=v.getNombre() %></h3>
+					</header>
+					<div class="card-block">
+						<div class="img-card">
+							<img alt="Portada" src="image.jsp?imag=<%=v.getIdViaje()%>" class="w-100" />
+						</div>
+						<p class="tagline card-text text-xs-center"><%=v.getDescripcion() %></p>
+						<a href="../ComprarViaje?idViaje=<%=v.getIdViaje()%>&idUsuario=<%=((Usuarios) session.getAttribute("usuLogeado")).getIdUsuario()%>" class="btn btn-primary btn-block"><%=v.getPrecio()%><i class="fa fa-eur" aria-hidden="true"></i>
+										Comprar <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
 					</div>
-				</div>
+				</article>
+			</div>
 			
-			<%} %>
 			
-			
+			 <%
+			}
+ 	}
+ %>
 			</div>
 		</div>
-
-
-
-
-
-
-
-		<%
-			}
-		%>
-
 	</div>
 
 
@@ -188,5 +235,6 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
 		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -51,13 +51,18 @@
 
 				<ul class="nav nav-pills flex-column sidebar-nav">
 					<li class="nav-item"><a class="nav-link"
-						href="usuario.jsp"><em class="fa fa-user-circle mr-1"></em> Principal
-							<span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="editarPerfil.jsp"><em
-							class="fa fa-cog mr-1"></em> Editar Perfil</a></li>
-							<li class="nav-item"><a class="nav-link" href="gestionarViajes.jsp"><em
-							class="fa fa-plane mr-1"></em> Gestionar Viajes</a></li>
-					
+						href="administrador.jsp"><em class="fa fa-user-circle mr-1"></em>
+							Editar Usuarios <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="editarPerfilAdmin.jsp"><em class="fa fa-cog mr-1"></em>
+							Editar Perfil</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="agregarViajes.jsp"><em class="fa fa-plane mr-1"></em>
+							Agregar Viajes</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="borrarViajes.jsp"><em class="fa fa-plane mr-1"></em>
+							Borrar Viajes</a></li>
+
 				</ul>
 
 				<a href="../CerrarSesion" class="logout-button"><em class="fa fa-power-off"></em>
@@ -124,7 +129,7 @@
 								<%
 									}
 								%>
-			<form role="form" method="POST" action="../EditarUsuario"
+			<form role="form" method="POST" action="../EditarUsuAdmin"
 									class="form-check">
 									<input style="display: none;" type="number" name="idUsuario" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getIdUsuario()%>" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"

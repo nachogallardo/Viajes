@@ -1,5 +1,7 @@
 package es.altair.dao;
 
+import java.util.List;
+
 import es.altair.bean.Usuarios;
 
 public interface UsuariosDao {
@@ -10,4 +12,9 @@ public interface UsuariosDao {
 
 	Usuarios comprobarUsuario(String usuario, String password);
 
+	void Editar(int idUsuario, String nombre, String nuevaContrasenia, String email, int telefono, String direccion,int tipo);
+	List<Usuarios> listarUsuarios();
+
+	void borrarUsuario(int idUsuario);
+	Usuarios usuarioPorId(int idUsuario);
 }

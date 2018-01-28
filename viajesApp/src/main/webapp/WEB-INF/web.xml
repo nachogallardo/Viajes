@@ -28,6 +28,48 @@
   	<description></description>
   	<servlet-class>es.altair.controller.ComprarViaje</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EditarUsuario</servlet-name>
+  	<display-name>EditarUsuario</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.EditarUsuario</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AgregarViaje</servlet-name>
+  	<display-name>AgregarViaje</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.AgregarViaje</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EditarUsuAdmin</servlet-name>
+  	<display-name>EditarUsuAdmin</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.EditarUsuAdmin</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>BorrarViaje</servlet-name>
+  	<display-name>BorrarViaje</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.BorrarViaje</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>BorrarUsuario</servlet-name>
+  	<display-name>BorrarUsuario</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.BorrarUsuario</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EditarOtroUsu</servlet-name>
+  	<display-name>EditarOtroUsu</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.EditarOtroUsu</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CancelarViaje</servlet-name>
+  	<display-name>CancelarViaje</display-name>
+  	<description></description>
+  	<servlet-class>es.altair.controller.CancelarViaje</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>RegistrarUsuario</servlet-name>
   	<url-pattern>/RegistrarUsuario</url-pattern>
@@ -43,5 +85,33 @@
   <servlet-mapping>
   	<servlet-name>ComprarViaje</servlet-name>
   	<url-pattern>/ComprarViaje</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditarUsuario</servlet-name>
+  	<url-pattern>/EditarUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AgregarViaje</servlet-name>
+  	<url-pattern>/AgregarViaje</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditarUsuAdmin</servlet-name>
+  	<url-pattern>/EditarUsuAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BorrarViaje</servlet-name>
+  	<url-pattern>/BorrarViaje</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BorrarUsuario</servlet-name>
+  	<url-pattern>/BorrarUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditarOtroUsu</servlet-name>
+  	<url-pattern>/EditarOtroUsu</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CancelarViaje</servlet-name>
+  	<url-pattern>/CancelarViaje</url-pattern>
   </servlet-mapping>
 </web-app>

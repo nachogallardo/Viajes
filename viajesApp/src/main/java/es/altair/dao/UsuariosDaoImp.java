@@ -1,5 +1,8 @@
 package es.altair.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 
@@ -16,8 +19,8 @@ public class UsuariosDaoImp implements UsuariosDao {
 		try {
 			sesion.beginTransaction();
 
-			if ((Usuarios) sesion.createSQLQuery("From usuarios Where nombre=:u")
-					.setParameter("u", usu.getNombre())
+			if ((Usuarios) sesion.createSQLQuery("SELECT u FROM Usuarios u WHERE nombre=:n")
+					.setParameter("n", usu.getNombre())
 					.uniqueResult() != null)
 				correcto = false;
 
@@ -79,6 +82,84 @@ public class UsuariosDaoImp implements UsuariosDao {
 			// sf.close();
 		}
 
+		return usu;
+	}
+
+	public void Editar(int idUsuario, String nombre, String nuevaContrasenia, String email, int telefono,
+			String direccion,int tipo) {
+		
+		Session sesion = SessionProvider.getSession();
+		try {
+			sesion.beginTransaction();
+
+			sesion.createQuery("UPDATE Usuarios SET nombre=:n, contrasenia=AES_ENCRYPT(:c, :passphrase), email=:e, telefono=:telefono, direccion=:d, tipoUsuario=:tipo where idUsuario=:i " )
+					.setParameter("n", nombre)
+					.setParameter("c", nuevaContrasenia)
+					.setParameter("passphrase", pass)
+					.setParameter("e", email)
+					.setParameter("telefono", telefono)
+					.setParameter("d", direccion)
+					.setParameter("tipo", tipo)
+					.setParameter("i", idUsuario)
+					.executeUpdate();
+
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			sesion.close();
+			// sf.close();
+		}
+
+	}
+
+	public List<Usuarios> listarUsuarios() {
+		List<Usuarios> usuarios= new ArrayList<Usuarios>();
+		Session sesion = SessionProvider.getSession();
+		try {
+			sesion.beginTransaction();
+
+			usuarios= sesion.createQuery("from Usuarios").list();
+
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			sesion.close();
+		}
+		return usuarios;
+	}
+
+	public void borrarUsuario(int idUsuario) {
+		Session sesion = SessionProvider.getSession();
+		try {
+			sesion.beginTransaction();
+
+			sesion.createQuery("delete from Usuarios where idUsuario=:i").setParameter("i", idUsuario).executeUpdate();
+
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			sesion.close();
+		}
+		
+	}
+
+	public Usuarios usuarioPorId(int idUsuario) {
+		Usuarios usu= new Usuarios();
+		Session sesion = SessionProvider.getSession();
+		try {
+			sesion.beginTransaction();
+
+			usu=(Usuarios)sesion.createQuery("from Usuarios where idUsuario=:i").setParameter("i", idUsuario).uniqueResult();
+
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			sesion.close();
+		}
 		return usu;
 	}
 
