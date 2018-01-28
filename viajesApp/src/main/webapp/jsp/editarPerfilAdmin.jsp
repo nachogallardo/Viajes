@@ -3,6 +3,21 @@
 <%@page import="es.altair.bean.Usuarios"%>
 <html lang="en">
 <head>
+<script>
+function validarTelefono() {
+	var telefono = document.getElementById("telefono").value;
+	error = document.getElementById("telefonoError");
+	boton = document.getElementById("btnRegistrar");
+	if (telefono.length<9||telefono.length>9) {
+		error.innerHTML = "El telefono debe tener 9 digitos";
+		boton.disabled = true;
+	} else {
+		error.innerHTML = "";
+		boton.disabled = false;
+	}
+
+}
+</script>
 <meta charset="utf-8">
 
 <meta name="viewport"
@@ -92,11 +107,9 @@
 
 					<div class="dropdown-menu dropdown-menu-right"
 						style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="editarPerfil.jsp"><em
+						<a class="dropdown-item" href="editarPerfilAdmin.jsp"><em
 							class="fa fa-cog mr-1"></em> Editar Perfil</a> <a class="dropdown-item" href="../CerrarSesion"><em
 							class="fa fa-power-off mr-1"></em> Cerrar Sesion</a>
-							<a class="dropdown-item" href="gestionarViajes.jsp"><em
-							class="fa fa-plane mr-1"></em> Gestionar Viajes</a>
 					</div>
 					
 					
@@ -149,7 +162,7 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-envelope text-primary"></i>
 											</div>
-											<input type="text" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getEmail()%>" name="email" required="required"
+											<input type="email" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getEmail()%>" name="email" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="Email">
 										</div>
@@ -169,11 +182,12 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-phone text-primary"></i>
 											</div>
-											<input type="number" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getTelefono()%>" name="telefono" required="required"
+											<input type="number" id="telefono" onblur="validarTelefono()" value="<%=((Usuarios) session.getAttribute("usuLogeado")).getTelefono()%>" name="telefono" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="telefono">
 										</div>
 									</div>
+									<p id="telefonoError" style="color: red; font-size: 12px;"></p>
 									<div class="form-group">
 										<div class="input-group mb-2 mb-sm-0">
 											<div class="input-group-addon bg-light">

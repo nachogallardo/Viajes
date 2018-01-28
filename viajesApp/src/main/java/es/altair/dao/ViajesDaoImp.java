@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Id;
+
 import org.hibernate.Session;
 
 import es.altair.bean.Usuarios;
@@ -54,10 +56,27 @@ public class ViajesDaoImp implements ViajesDao {
 	}
 
 	public boolean AñadirBilletes(int idUsuario, int idViaje) {
-		boolean comprado=false;
+		boolean comprado=true;
 		Session sesion = SessionProvider.getSession();
 		Usuarios usu=new Usuarios();
 		Viajes viaje=new Viajes();
+		
+		int hayBillete=0;
+		try {
+			sesion.beginTransaction();			
+		//sesion.save(usu);
+			hayBillete=(Integer) sesion.createSQLQuery("select idViaje from billetes where idViaje=:idViaje and idUsuario=:idUsuario").setParameter("idViaje", idViaje).setParameter("idUsuario", idUsuario).uniqueResult();
+			
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			
+			// sf.close();
+		}
+		if(hayBillete>0)
+			comprado=false;
+		
 		try {
 			sesion.beginTransaction();
 			
@@ -73,10 +92,11 @@ public class ViajesDaoImp implements ViajesDao {
 		
 		viaje.getUsuarios().add(usu);
 		usu.getViajes().add(viaje);
-		int filas=0;
-		try {sesion.beginTransaction();			
+
+		try {
+			sesion.beginTransaction();			
 		//sesion.save(usu);
-			filas=(Integer) sesion.save(viaje);
+			sesion.save(viaje);
 			
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
@@ -85,8 +105,7 @@ public class ViajesDaoImp implements ViajesDao {
 			sesion.close();
 			// sf.close();
 		}
-		if(filas==1)
-			comprado=true;
+		
 		return comprado;
 		
 	}

@@ -20,6 +20,19 @@
 			boton.disabled = true;
 		}
 	}
+	function validarTelefono() {
+		var telefono = document.getElementById("telefono").value;
+		error = document.getElementById("telefonoError");
+		boton = document.getElementById("btnRegistrar");
+		if (telefono.length<9||telefono.length>9) {
+			error.innerHTML = "El telefono debe tener 9 digitos";
+			boton.disabled = true;
+		} else {
+			error.innerHTML = "";
+			boton.disabled = false;
+		}
+
+	}
 </script>
 <meta charset="utf-8">
 
@@ -58,11 +71,11 @@
 		<div class="row">
 			<nav
 				class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded sidebar-style-1">
-				
-				
+
+
 				<div style="height: 5%;" class="row"></div>
 				<h1 class="site-title">
-					 <em class="fa fa-rocket"></em>Inicie Sesion
+					<em class="fa fa-rocket"></em>Inicie Sesion
 				</h1>
 				<form role="form" method="POST" action="ValidarUsuario"
 					class="form-check">
@@ -80,7 +93,7 @@
 							<input class="form-control" type="password" id="password"
 								name="password" placeholder="Contraseña" required="required">
 						</div>
-						
+
 						<div class="col-12"></div>
 						<button type="submit" class="btn btn-md btn-info col-12">
 							<i class="fa fa-sign-in"></i> Iniciar Sesion
@@ -124,25 +137,24 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
-						<%
-							for (Viajes v : viajes) {
-						%>
-						<div class="col-md-6">
-						<div class="card" style="width: 18rem;height: 30rem;">
-							<img alt="Portada" src="jsp/image.jsp?imag=<%=v.getIdViaje()%>"
-								class="img-thumbnail" width="286" height="186">
-								<br>
-							<div class="card-body">
-								<h5 class="card-title"><%=v.getNombre()%></h5>
-								<p class="card-text"><%=v.getDescripcion()%></p>
+							<%
+								for (Viajes v : viajes) {
+							%>
+							<div class="col-md-6">
+								<div class="card" style="width: 18rem; height: 30rem;">
+									<img alt="Portada" src="jsp/image.jsp?imag=<%=v.getIdViaje()%>"
+										class="img-thumbnail" width="286" height="186"> <br>
+									<div class="card-body">
+										<h5 class="card-title"><%=v.getNombre()%></h5>
+										<p class="card-text"><%=v.getDescripcion()%></p>
+									</div>
+								</div>
 							</div>
-							</div>
-						</div>
 
-						<%
-							}
-						%>
-					</div>
+							<%
+								}
+							%>
+						</div>
 					</div>
 					<div class="col-md-4">
 
@@ -188,7 +200,7 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-envelope text-primary"></i>
 											</div>
-											<input type="text" name="email" required="required"
+											<input type="email" name="email" required="required"
 												class="form-control" id="inlineFormInputGroupUsername"
 												placeholder="Email">
 										</div>
@@ -221,11 +233,12 @@
 											<div class="input-group-addon bg-light">
 												<i class="fa fa-phone text-primary"></i>
 											</div>
-											<input type="number" name="telefono" required="required"
-												class="form-control" id="inlineFormInputGroupUsername"
-												placeholder="telefono">
+											<input type="number" id="telefono" onblur="validarTelefono()"
+												name="telefono" required="required" class="form-control"
+												id="inlineFormInputGroupUsername" placeholder="telefono">
 										</div>
 									</div>
+									<p id="telefonoError" style="color: red; font-size: 12px;"></p>
 									<div class="form-group">
 										<div class="input-group mb-2 mb-sm-0">
 											<div class="input-group-addon bg-light">

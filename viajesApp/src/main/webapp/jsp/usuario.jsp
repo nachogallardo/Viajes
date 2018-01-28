@@ -171,6 +171,20 @@
 
 				<div class="clear"></div>
 			</header>
+						<%
+							String infoCompra = request.getParameter("infoCompra");
+							if (infoCompra != null) {
+						%>
+						<div style="color: black;"
+							class="alert alert-warning alert-dismissable form-control">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">x</button>
+							<strong>Info!</strong>
+							<%=infoCompra%>
+						</div>
+						<%
+							}
+						%>
 			<div class="row">
 			<%for(Viajes v:viajes){ %>
 

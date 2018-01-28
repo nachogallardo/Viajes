@@ -12,17 +12,17 @@ import es.altair.util.SessionProvider;
 public class UsuariosDaoImp implements UsuariosDao {
 	private String pass = "Libros123$%";
 	public boolean validarUsuario(Usuarios usu) {
-		boolean correcto = true;
-		
+		boolean correcto = false;
+		Usuarios usuario=null;
 
 		Session sesion = SessionProvider.getSession();
 		try {
 			sesion.beginTransaction();
 
-			if ((Usuarios) sesion.createSQLQuery("SELECT u FROM Usuarios u WHERE nombre=:n")
+			usuario=(Usuarios) sesion.createSQLQuery("SELECT u FROM Usuarios u WHERE nombre=:n")
 					.setParameter("n", usu.getNombre())
-					.uniqueResult() != null)
-				correcto = false;
+					.uniqueResult();
+				
 
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
@@ -30,6 +30,8 @@ public class UsuariosDaoImp implements UsuariosDao {
 		} finally {
 			sesion.close();
 		}
+		if(usuario!=null)
+			correcto=true;
 		return correcto;
 		
 	}

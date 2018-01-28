@@ -48,7 +48,7 @@ public class EditarUsuario extends HttpServlet {
 		uDao.Editar(idUsuario,nombre,nuevaContrasenia,email,telefono,direccion,tipoUsuario);
 		
 		Usuarios usu = new Usuarios(nombre, nuevaContrasenia, email, telefono, direccion, tipoUsuario);
-		if (uDao.validarUsuario(usu)) {
+		if (!uDao.validarUsuario(usu)) {
 			// Usuario correcto
 			// Poner al usuario en sesión
 			HttpSession sesion = request.getSession();

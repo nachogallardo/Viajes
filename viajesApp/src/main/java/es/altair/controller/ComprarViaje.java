@@ -34,9 +34,9 @@ public class ComprarViaje extends HttpServlet {
 		ViajesDao vDao = new ViajesDaoImp();
 		
 		if(vDao.AñadirBilletes(idUsuario,idViaje)) {
-			response.sendRedirect("jsp/usuario.jsp?comprado=El viaje se ha comprado.");
+			response.sendRedirect("jsp/usuario.jsp?infoCompra=El viaje se ha comprado.");
 		}else {
-			response.sendRedirect("jsp/usuario.jsp?comprado=El viaje ya estaba comprado.");
+			response.sendRedirect("jsp/usuario.jsp?infoCompra=El viaje ya estaba comprado.");
 		}
 		
 		
