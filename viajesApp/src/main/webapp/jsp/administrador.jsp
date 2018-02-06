@@ -102,9 +102,7 @@
 						<a class="dropdown-item" href="editarPerfilAdmin.jsp"><em
 							class="fa fa-cog mr-1"></em> Editar Perfil</a> <a
 							class="dropdown-item" href="../CerrarSesion"><em
-							class="fa fa-power-off mr-1"></em> Cerrar Sesion</a> <a
-							class="dropdown-item" href="gestionarViajes.jsp"><em
-							class="fa fa-plane mr-1"></em> Gestionar Viajes</a>
+							class="fa fa-power-off mr-1"></em> Cerrar Sesion</a>
 					</div>
 				</div>
 

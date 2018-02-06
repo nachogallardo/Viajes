@@ -49,7 +49,7 @@ public class RegistrarUsuario extends HttpServlet {
 		int filas = 0;
 		String msg = "";		
 		
-		if (uDAO.validarUsuario(usu)) {
+		if (!uDAO.validarUsuario(usu)) {
 			filas = uDAO.insertar(usu);
 			if (filas == 1) {
 				msg = "Usuario Registrado";

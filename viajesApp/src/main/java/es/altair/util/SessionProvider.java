@@ -18,7 +18,7 @@ public class SessionProvider {
 				.setProperty("hibernate.connection.driver.class", "com.mysql.jdbc.Driver")
 				.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/viajes")
 				.setProperty("hibernate.connection.username", "root")
-				.setProperty("hibernate.connection.password", "altair123")
+				.setProperty("hibernate.connection.password", "my123$%sql")
 				.setProperty("hibernate.show_sql", "true")
 				.addAnnotatedClass(es.altair.bean.Usuarios.class)
 				.addAnnotatedClass(es.altair.bean.Viajes.class);
