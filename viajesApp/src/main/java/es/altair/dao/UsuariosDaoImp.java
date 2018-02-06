@@ -19,7 +19,7 @@ public class UsuariosDaoImp implements UsuariosDao {
 		try {
 			sesion.beginTransaction();
 
-			usuario=(Usuarios) sesion.createSQLQuery("SELECT u FROM Usuarios u WHERE nombre=:n")
+			usuario=(Usuarios) sesion.createQuery("SELECT u FROM Usuarios u WHERE nombre=:n")
 					.setParameter("n", usu.getNombre())
 					.uniqueResult();
 				

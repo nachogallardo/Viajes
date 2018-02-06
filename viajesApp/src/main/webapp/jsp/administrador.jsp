@@ -38,9 +38,9 @@
 		if (session.getAttribute("usuLogeado") == null || session.isNew()) {
 			response.sendRedirect("../index.jsp?mensaje=Inicie sesión");
 		} else {
-			UsuariosDao uDao=new UsuariosDaoImp();
-			List<Usuarios> usuarios= new ArrayList<Usuarios>();
-			usuarios=uDao.listarUsuarios();
+			UsuariosDao uDao = new UsuariosDaoImp();
+			List<Usuarios> usuarios = new ArrayList<Usuarios>();
+			usuarios = uDao.listarUsuarios();
 	%>
 
 	<div class="container-fluid" id="wrapper">
@@ -85,9 +85,9 @@
 
 				<div
 					class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
-					<a class="btn btn-stripped dropdown-toggle"
-						href="#" id="dropdownMenuLink"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="btn btn-stripped dropdown-toggle" href="#"
+						id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
 
 
 						<div class="username mt-1">
@@ -108,60 +108,96 @@
 
 				<div class="clear"></div>
 			</header>
-			
 
-<div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover table-striped">
-                            <tbody>
-                               <%for(Usuarios u:usuarios){ %>
-                                <tr>
-                                    <td>
-                                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
-                                    </td>
-                                    <td>
-                                        <h4>
-                                            <b><%=u.getNombre() %></b>
-                                        </h4>
-                                        <p><%=u.getDireccion() %></p>
-                                    </td>
-                                    
-                                    <td>
-                                        <h4>
-                                            <b><%=u.getTelefono() %></b>
-                                        </h4>
-                                        <a href="#"> <%=u.getEmail() %></a>
-                                    </td>
-                                    <td>
-                                       
-                                        <a href="../BorrarUsuario?id=<%=u.getIdUsuario()%>">
-                                            <button class="btn btn-outline-danger" value="left" type="button">
-                                                <i class="fa fa-fw s fa-remove"></i>Eliminar</button>
-                                                </a>
-                                                </td>
-                                                <td>
-                                                <a href="editarOtroPerfil.jsp?id=<%=u.getIdUsuario()%>">
-                                            <button class="btn btn-outline-info" value="right" type="button">
-                                                <i class="fa fa-fw fa-cog"></i>Configurar</button>
-                                                </a>
-                                                </td>
-                                      
-                                    
-                                </tr>
-                                <%} %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-			
-			
-			 <%
- 	}
- %>
+
+			<div class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover table-striped">
+								<tbody>
+									<%
+										for (Usuarios u : usuarios) {
+									%>
+									<tr>
+										<td><img
+											src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
+											class="img-circle" width="60"></td>
+										<td>
+											<h4>
+												<b><%=u.getNombre()%></b>
+											</h4>
+											<p><%=u.getDireccion()%></p>
+										</td>
+
+										<td>
+											<h4>
+												<b><%=u.getTelefono()%></b>
+											</h4> <a href="#"> <%=u.getEmail()%></a>
+										</td>
+										<td>
+										<a data-toggle="modal" data-target="#borrarUsuario<%=u.getIdUsuario()%>">
+												<button class="btn btn-outline-danger" value="left"
+													type="button">
+													<i class="fa fa-fw s fa-remove"></i>Eliminar
+												</button>
+										</a></td>
+										<td><a
+											href="editarOtroPerfil.jsp?id=<%=u.getIdUsuario()%>">
+												<button class="btn btn-outline-info" value="right"
+													type="button">
+													<i class="fa fa-fw fa-cog"></i>Configurar
+												</button>
+										</a></td>
+
+
+
+										<div class="modal fade"
+											id="borrarUsuario<%=u.getIdUsuario()%>" tabindex="-1"
+											role="dialog" aria-labelledby="exampleModalLabel"
+											aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Borrar
+															Usuario</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">¿Estás seguro de borrar el
+														usuario?</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">No</button>
+														<button type="button" class="btn btn-primary"
+															onclick="location.href='../BorrarUsuario?id=<%=u.getIdUsuario()%>'">Sí</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</tr>
+									<%
+										}
+									%>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+			<%
+				}
+			%>
 			
 		</div>
 	</div>
